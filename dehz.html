@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>dehz</title>
+		<meta charset="utf-8">
+		<link href="dehz.css" rel="stylesheet">
+		<script src="dehz.js"></script>
+		<script src="https://fockjef.net/js/xhr.js"></script>
+		<script>
+			window.onload = function(){
+				XHR.get("dehz.json",function(data){dehz.init(data)},console.log("ERROR: "+data),"json");
+			};
+		</script>
+	</head>
+	<body>
+		<div id="header">
+			<div class="mainMenu"></div>
+			<div class="levelPackMenu"></div>
+			<div class="levelSelectMenu"></div>
+			<div class="puzzle"></div>
+		</div>
+		<div id="content">
+			<div class="mainMenu"></div>
+			<div class="levelPackMenu"></div>
+			<div class="levelSelectMenu"></div>
+			<div class="puzzle"></div>
+		</div>
+		<div id="header">
+			<div class="mainMenu"></div>
+			<div class="levelPackMenu"></div>
+			<div class="levelSelectMenu"></div>
+			<div class="puzzle"></div>
+		</div>
+	</body>
+</html>
