@@ -15,7 +15,7 @@ var dehz = function(){
 				getRange(r,c,tiles[r][c].dataset.range,-1, 0),
 				getRange(r,c,tiles[r][c].dataset.range, 0, 1),
 				getRange(r,c,tiles[r][c].dataset.range, 0,-1)
-			).forEach(function(t){t.classList.add("dot")});
+			).forEach(function(t){t.classList.add("dot","blink")});
 			activeTile = {r:r,c:c,range:tiles[r][c].dataset.range};
 			return;
 		}
@@ -60,8 +60,10 @@ var dehz = function(){
 			completedLevels: []
 		},
 		init: function(data,id){
-			this.data = data;
-			this.root = document.getElementById(id) || document.body;
+			header  = document.getElementById("header");
+			content = document.getElementById("content");
+			footer  = document.getElementById("footer");
+
 			/* Create stylesheet */
 			document.head.appendChild(document.createElement("style"))
 			var ss = document.styleSheets[document.styleSheets.length-1];
@@ -71,8 +73,10 @@ var dehz = function(){
 				ss.insertRule(".pack"+p.packId+" { background-color: "+c2+"; color: "+c1+"; }");
 				ss.insertRule(".pack"+p.packId+" .tile { background-color: "+c1+"; color: "+c2+"; }");
 				ss.insertRule(".pack"+p.packId+" .dot { background-color: "+c1+" !important; }");
+				ss.insertRule(".pack"+p.packId+" svg * { stroke: "+c1+"; fill: "+c1+"; }");
 				for( var i = 0; i < NUM_SHADE; i++ ) ss.insertRule(".pack"+p.packId+" .shade"+i+" { background-color: "+rgba(p.c1,(i+1)*0.025)+"; }");
 			});
+			
 			this.setLevel(this.progress.currentLevel);
 		},
 		menuMain: function(){
@@ -82,7 +86,6 @@ var dehz = function(){
 			return undefined;
 		},
 		setLevel: function(l){
-			this.root.innerHTML = "";
 			var level = this.data.levels[l],
 				head = this.root.appendChild(document.createElement("div")),
 				table = this.root.appendChild(document.createElement("table")),

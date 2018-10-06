@@ -3,33 +3,98 @@
 	<head>
 		<title>dehz</title>
 		<meta charset="utf-8">
-		<link href="dehz.css" rel="stylesheet">
-		<script src="dehz.js"></script>
+		<link href="https://fockjef.net/dehz/dehz.css" rel="stylesheet">
+		<script src="https://fockjef.net/dehz/dehz.js"></script>
 		<script src="https://fockjef.net/js/xhr.js"></script>
 		<script>
-			window.onload = function(){
-				XHR.get("dehz.json",function(data){dehz.init(data)},console.log("ERROR: "+data),"json");
-			};
+			//window.onload = function(){XHR.get("dehz.json",function(data){dehz.init(data)},console.log,"json")};
 		</script>
+		<style>
+			.button { display: inline-block; cursor: pointer; margin: 0px 1em; width: initial; padding: 0.2em 0.5em; }
+			.button svg { width: 3.5em; display: block; }
+			svg * { stroke: black; fill: black; }
+			svg *.nostroke { stroke: none; }
+			svg *.nofill { fill: none; }
+			#mainMenu .content { margin: 0px auto; }
+			#progressMeter { height: 0px; }
+			#progressMeter svg { height: 20em; }
+			#currentLevel { line-height: 4em; text-align: center; font-family: "Arial Black"; font-size: 5em; }
+			
+			#mainMenu .footer {
+				margin-top: 2.5em;
+			}
+			#levelMenu { display: initial; }
+			#puzzle { display: initial; }
+		</style>
 	</head>
 	<body>
-		<div id="header">
-			<div class="mainMenu"></div>
-			<div class="levelPackMenu"></div>
-			<div class="levelSelectMenu"></div>
-			<div class="puzzle"></div>
+
+		<div id="mainMenu">
+			<div class="header">
+				<table>
+					<tr><td></td><td><div class="dot"></div></td><td></td><td></td><td></td><td></td></tr>
+					<tr><td><div class="dot"></div></td><td><div class="tile">D</div></td><td>E</td><td>H</td><td>Z</td><td><div class="dot"></div></td></tr>
+					<tr><td></td><td><div class="dot"></div></td><td></td><td></td><td></td><td></td></tr>
+				</table>
+			</div>
+			<div class="content">
+				<div id="progressMeter">
+					<svg viewBox="0 0 100 100">
+						<circle cx="50" cy="50" r="47.5" stroke-width="1" class="nofill" />
+						<circle id="progressCircle" cx="50" cy="50" r="47.5" stroke-dasharray="0 100" pathlength="100" stroke-width="5" class="nofill" />
+					</svg>
+				</div>
+				<div id="currentLevel">
+					0
+				</div>
+			</div>
+			<div class="footer">
+				<span class="button tile"><span>LEVELS</span></span>
+			</div>
 		</div>
-		<div id="content">
-			<div class="mainMenu"></div>
-			<div class="levelPackMenu"></div>
-			<div class="levelSelectMenu"></div>
-			<div class="puzzle"></div>
+
+		<div id="levelMenu">
+			<div class="header">
+				<div>Level Board</div>
+			</div>
+			<div class="content">
+			</div>
+			<div class="footer">
+				<span class="backButton">BACK</span>
+			</div>
 		</div>
-		<div id="header">
-			<div class="mainMenu"></div>
-			<div class="levelPackMenu"></div>
-			<div class="levelSelectMenu"></div>
-			<div class="puzzle"></div>
+
+		<div id="puzzle">
+			<div class="header">
+			</div>
+			<div class="content">
+			</div>
+			<div class="footer">
+				<span class="button">
+					<svg viewBox="0 0 100 100">
+						<circle cx="50" cy="50" r="45" stroke-width="10" class="nofill" />
+						<circle cx="25" cy="50" r="7.5" class="nostroke" />
+						<circle cx="50" cy="50" r="7.5" class="nostroke" />
+						<circle cx="75" cy="50" r="7.5" class="nostroke" />
+					</svg>
+					MENU
+				</span>
+				<span class="button">
+					<svg viewbox="0 0 100 100">
+						<ellipse cx="50" cy="50" rx="40" ry="30" stroke-width="20" stroke-dasharray="26% 14% 36% 14% 11%" pathlength="100" class="nofill" />
+						<path d="M50,0 l0,40 l20-20 z M50,60 l0,40 l-20-20 z" />
+					</svg>
+					RESET
+				</span>
+				<span class="button">
+					<svg viewbox="0 0 100 100">
+						<ellipse cx="50" cy="50" rx="40" ry="30" stroke-width="20" stroke-dasharray="25% 49% 27%" pathlength="100" class="nofill" />
+						<path d="M50,0 l0,40 l-20-20" />
+					</svg>
+					UNDO
+				</span>
+			</div>
 		</div>
+
 	</body>
 </html>

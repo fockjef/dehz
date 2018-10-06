@@ -1,0 +1,85 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	font-family: "Impact", "Charcoal", "Arial Black", sans-serif;
+	text-align: center;
+}
+#mainMenu .content {
+	margin: 0px auto;
+}
+#progressMeter {
+	height: 0px;
+}
+#progressMeter svg {
+	height: 20em; 
+}
+#currentLevel { 
+	line-height: 4em; 
+	font-size: 5em; 
+}
+#mainMenu .footer {
+	margin-top: 2.5em;
+}
+#levelMenu { 
+	display: none; 
+}
+#puzzle { 
+	display: initial; 
+}
+table {
+	border-collapse: collapse;
+	margin: 0px auto;
+}
+td {
+	width: 2.5em;
+	height: 2.5em;
+}
+td > div {
+	width: 97.5%;
+	height: 97.5%;
+}
+.tile, .goal {
+	border-radius: 5%;
+	box-shadow: 0em -0.15em 0em 0em rgba(0, 0, 0, 0.5) inset;
+	font-size: 2em;
+	line-height: 1.1em;
+}
+.goal {
+	background-color: white !important;
+}
+.goal:before {
+	content: "";
+	display: block;
+	position: relative;
+	background: rgba(0,0,0,0.5);
+	width: 30%;
+	height: 30%;
+	border-radius: 10%;
+	top: 30%;
+	left: 35%;
+}
+.dot {
+	width: 33%;
+	height: 33%;
+	border-radius: 50%;
+	margin: 34%;
+	animation: blink;
+}
+@keyframes blink {0%{opacity:0.7;} 50%{opacity:0.4;} 100%{opacity:0.7;}}
+.blink {
+	animation: blink normal 2.5s infinite ease-in-out;
+}
+.button {
+	display: inline-block; 
+	cursor: pointer;
+	margin: 0px 1em;
+	padding: 0.2em 0.5em;
+}
+.button svg {
+	display: block;
+	width: 3.5em;
+}
+svg *.nostroke { stroke: none; }
+svg *.nofill { fill: none; }
