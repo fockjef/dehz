@@ -5,9 +5,10 @@
 body {
 	font-family: "Impact", "Charcoal", "Arial Black", sans-serif;
 	text-align: center;
+	margin-top: 2em;
 }
 #mainMenu .content {
-	margin: 0px auto;
+	margin: 2em auto;
 }
 #progressMeter {
 	height: 0px;
@@ -20,7 +21,7 @@ body {
 	font-size: 5em; 
 }
 #mainMenu .footer {
-	margin-top: 2.5em;
+	margin-top: 2em;
 }
 #levelMenu { 
 	display: none; 
@@ -81,5 +82,5 @@ td > div {
 	display: block;
 	width: 3.5em;
 }
-svg *.nostroke { stroke: none; }
-svg *.nofill { fill: none; }
+svg *.nostroke { stroke: none !important; }
+svg *.nofill { fill: none !important; }

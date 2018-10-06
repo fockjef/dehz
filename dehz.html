@@ -3,29 +3,14 @@
 	<head>
 		<title>dehz</title>
 		<meta charset="utf-8">
-		<link href="https://fockjef.net/dehz/dehz.css" rel="stylesheet">
-		<script src="https://fockjef.net/dehz/dehz.js"></script>
+		<link href="dehz.css" rel="stylesheet">
+		<script src="dehz.js"></script>
+		<script src="dehz-data.js"></script>
 		<script src="https://fockjef.net/js/xhr.js"></script>
 		<script>
+			window.onload = function(){dehz.init(dehz.data)};
 			//window.onload = function(){XHR.get("dehz.json",function(data){dehz.init(data)},console.log,"json")};
 		</script>
-		<style>
-			.button { display: inline-block; cursor: pointer; margin: 0px 1em; width: initial; padding: 0.2em 0.5em; }
-			.button svg { width: 3.5em; display: block; }
-			svg * { stroke: black; fill: black; }
-			svg *.nostroke { stroke: none; }
-			svg *.nofill { fill: none; }
-			#mainMenu .content { margin: 0px auto; }
-			#progressMeter { height: 0px; }
-			#progressMeter svg { height: 20em; }
-			#currentLevel { line-height: 4em; text-align: center; font-family: "Arial Black"; font-size: 5em; }
-			
-			#mainMenu .footer {
-				margin-top: 2.5em;
-			}
-			#levelMenu { display: initial; }
-			#puzzle { display: initial; }
-		</style>
 	</head>
 	<body>
 
@@ -68,6 +53,7 @@
 			<div class="header">
 			</div>
 			<div class="content">
+				<table id="puzzle-table"></table>
 			</div>
 			<div class="footer">
 				<span class="button">

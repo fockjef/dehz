@@ -8,7 +8,7 @@ var dehz = function(){
 
 	function clickTile(r,c){
 		var isDot = tiles[r][c].classList.contains("dot");
-		tiles.forEach(function(row){row.forEach(function(t){t.classList.remove("dot")})});
+		tiles.forEach(function(row){row.forEach(function(t){t.classList.remove("dot","blink")})});
 		if( tiles[r][c].dataset.range > 0 ){
 			[].concat(
 				getRange(r,c,tiles[r][c].dataset.range, 1, 0),
@@ -23,7 +23,7 @@ var dehz = function(){
 			if( tiles[r][c].dataset.range === "-1" ){
 				this.progress.completedLevels.push(this.progress.currentLevel);
 				this.progress.currentLevel++;
-				localStorage.setItem("dehz-progress",JSON.stringify(this.progress));
+				//localStorage.setItem("dehz-progress",JSON.stringify(this.progress));
 				this.setLevel(this.progress.currentLevel);
 				return console.log("Level Complete!");
 			}
@@ -55,15 +55,11 @@ var dehz = function(){
 	}
 
 	return {
-		progress: JSON.parse(localStorage.getItem("dehz-progress")) || {
+		progress: {
 			currentLevel: 0,
 			completedLevels: []
 		},
 		init: function(data,id){
-			header  = document.getElementById("header");
-			content = document.getElementById("content");
-			footer  = document.getElementById("footer");
-
 			/* Create stylesheet */
 			document.head.appendChild(document.createElement("style"))
 			var ss = document.styleSheets[document.styleSheets.length-1];
@@ -76,7 +72,6 @@ var dehz = function(){
 				ss.insertRule(".pack"+p.packId+" svg * { stroke: "+c1+"; fill: "+c1+"; }");
 				for( var i = 0; i < NUM_SHADE; i++ ) ss.insertRule(".pack"+p.packId+" .shade"+i+" { background-color: "+rgba(p.c1,(i+1)*0.025)+"; }");
 			});
-			
 			this.setLevel(this.progress.currentLevel);
 		},
 		menuMain: function(){
@@ -86,13 +81,9 @@ var dehz = function(){
 			return undefined;
 		},
 		setLevel: function(l){
-			var level = this.data.levels[l],
-				head = this.root.appendChild(document.createElement("div")),
-				table = this.root.appendChild(document.createElement("table")),
-				foot = this.root.appendChild(document.createElement("div"));
-			head.id = "level-head";
-			table.id = "level-content";
-			foot.id = "level-foot";
+			var level = this.data.levels[l];
+				table = document.getElementById("puzzle-table");
+			table.innerHTML = "";
 			tiles = [];
 			for( var r = 0; r < level.rows; r++ ){
 				tiles[r] = new Array(level.cols);
@@ -110,12 +101,9 @@ var dehz = function(){
 				if( t.range === -1 ) tiles[t.y][t.x].classList.add("goal");
 				else                 tiles[t.y][t.x].innerHTML = t.range;
 			});
-			head.appendChild(document.createElement("span"));
-			head.appendChild(document.createElement("span").appendChild(document.createTextNode(l)).parentNode);
-			head.appendChild(document.createElement("span"));
-			DOMTokenList.prototype.remove.apply(this.root.classList,this.data.packs.map(function(p){return "pack"+p.packId}));
+			DOMTokenList.prototype.remove.apply(document.body.classList,this.data.packs.map(function(p){return "pack"+p.packId}));
 			this.progress.currentLevel = l;
-			this.root.classList.add("pack"+this.data.levels[this.progress.currentLevel].packId);
+			document.body.classList.add("pack"+this.data.levels[this.progress.currentLevel].packId);
 		},
 		resetLevel: function(){
 			this.setLevel(this.progress.currentLevel);
