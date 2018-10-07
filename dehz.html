@@ -4,17 +4,14 @@
 		<title>dehz</title>
 		<meta charset="utf-8">
 		<link href="dehz.css" rel="stylesheet">
-		<script src="dehz.js"></script>
-		<script src="dehz-data.js"></script>
+		<script src="dehz-test.js"></script>
 		<script src="https://fockjef.net/js/xhr.js"></script>
 		<script>
-			window.onload = function(){dehz.init(dehz.data)};
-			//window.onload = function(){XHR.get("dehz.json",function(data){dehz.init(data)},console.log,"json")};
+			window.onload = function(){XHR.get("dehz.json",function(data){dehz.init(JSON.parse(data))},console.log,"text")};
 		</script>
 	</head>
 	<body>
-
-		<div id="mainMenu">
+		<div id="mainMenu" class="noshow">
 			<div class="header">
 				<table>
 					<tr><td></td><td><div class="dot"></div></td><td></td><td></td><td></td><td></td></tr>
@@ -23,64 +20,88 @@
 				</table>
 			</div>
 			<div class="content">
-				<div id="progressMeter">
+				<div id="progress">
 					<svg viewBox="0 0 100 100">
 						<circle cx="50" cy="50" r="47.5" stroke-width="1" class="nofill" />
-						<circle id="progressCircle" cx="50" cy="50" r="47.5" stroke-dasharray="0 100" pathlength="100" stroke-width="5" class="nofill" />
+						<path id="progressMeter" d="" stroke-width="5" class="nofill" />
 					</svg>
 				</div>
-				<div id="currentLevel">
-					0
-				</div>
+				<span class="button" data-action="setLevel">
+					<span id="mainMenuLevel"></span>
+				</span>
 			</div>
 			<div class="footer">
-				<span class="button tile"><span>LEVELS</span></span>
+				<span class="button tile" data-action="packMenu"><span>LEVELS</span></span>
 			</div>
 		</div>
-
-		<div id="levelMenu">
+		<div id="packMenu" class="noshow">
 			<div class="header">
 				<div>Level Board</div>
 			</div>
 			<div class="content">
 			</div>
 			<div class="footer">
-				<span class="backButton">BACK</span>
+				<span class="button tile" data-action="mainMenu"><span>BACK</span></span>
 			</div>
 		</div>
-
-		<div id="puzzle">
+		<div id="levelMenu" class="noshow">
 			<div class="header">
+				<div>Level Board</div>
+			</div>
+			<div class="content">
+			</div>
+			<div class="footer">
+				<span class="button tile" data-action="packMenu"><span>BACK</span></span>
+			</div>
+		</div>
+		<div id="puzzle" class="noshow">
+			<div class="header">
+				<span class="button" data-action="prevLevel">
+					<svg viewbox="0 0 100 100">
+						<path d="M25,50 l50,25 l0-50 z" stroke-width="2.5" class="nofill"/>
+					</svg>
+				</span>
+				<span id="puzzleLevel"></span>
+				<span class="button" data-action="nextLevel">
+					<svg viewbox="0 0 100 100">
+						<path d="M75,50 l-50,25 l0-50 z" stroke-width="2.5" class="nofill"/>
+					</svg>
+				</span>
 			</div>
 			<div class="content">
 				<table id="puzzle-table"></table>
 			</div>
 			<div class="footer">
-				<span class="button">
+				<span class="button" data-action="mainMenu">
 					<svg viewBox="0 0 100 100">
-						<circle cx="50" cy="50" r="45" stroke-width="10" class="nofill" />
+						<circle cx="50" cy="50" r="46.25" stroke-width="7.5" class="nofill" />
 						<circle cx="25" cy="50" r="7.5" class="nostroke" />
 						<circle cx="50" cy="50" r="7.5" class="nostroke" />
 						<circle cx="75" cy="50" r="7.5" class="nostroke" />
 					</svg>
-					MENU
+					<span>MENU</span>
 				</span>
-				<span class="button">
+				<span class="button" data-action="getHint">
 					<svg viewbox="0 0 100 100">
-						<ellipse cx="50" cy="50" rx="40" ry="30" stroke-width="20" stroke-dasharray="26% 14% 36% 14% 11%" pathlength="100" class="nofill" />
+						<path d="M 54.2 100.0 h -8.3 c -1.2 0.0 -2.3 -0.5 -3.1 -1.4 l -2.4 -2.7 h 19.4 l -2.4 2.7 c -0.8 0.9 -1.9 1.4 -3.1 1.4 z m 7.8 -12.5 c 1.2 0.0 2.2 0.9 2.2 2.1 s -1.0 2.1 -2.2 2.1 h -23.9 c -1.2 0.0 -2.2 -0.9 -2.2 -2.1 s 1.0 -2.1 2.2 -2.1 h 23.9 z m -12.0 -70.8 c 12.4 0.0 25.0 8.2 25.0 23.9 0.0 8.1 -4.0 15.1 -7.9 21.9 -3.8 6.6 -7.7 13.3 -7.7 20.9 h 4.2 c 0.0 -13.7 15.6 -25.4 15.6 -42.8 0.0 -18.1 -14.6 -28.1 -29.2 -28.1 -14.6 0.0 -29.2 10.0 -29.2 28.1 0.0 17.3 15.6 29.1 15.6 42.8 h 4.2 c 0.0 -7.6 -3.9 -14.3 -7.7 -20.9 -3.9 -6.8 -7.9 -13.8 -7.9 -21.9 0.0 -15.7 12.6 -23.9 25.0 -23.9 z m 39.3 33.2 c 1.0 0.5 1.5 1.7 1.0 2.8 -0.5 1.0 -1.7 1.5 -2.8 1.0 l -3.8 -1.7 c -1.1 -0.5 -1.5 -1.7 -1.0 -2.8 0.5 -1.0 1.7 -1.5 2.8 -1.0 l 3.8 1.7 z m -78.5 0.0 c -1.0 0.5 -1.5 1.7 -1.0 2.8 0.5 1.0 1.7 1.5 2.8 1.0 l 3.8 -1.7 c 1.1 -0.5 1.5 -1.7 1.0 -2.8 -0.5 -1.0 -1.7 -1.5 -2.8 -1.0 l -3.8 1.7 z m 78.8 -12.3 h -4.2 c -1.2 0.0 -2.1 -0.9 -2.1 -2.1 s 0.9 -2.1 2.1 -2.1 h 4.2 c 1.2 0.0 2.1 0.9 2.1 2.1 s -0.9 2.1 -2.1 2.1 z m -75.0 -4.2 c 1.2 0.0 2.1 0.9 2.1 2.1 s -0.9 2.1 -2.1 2.1 h -4.2 c -1.2 0.0 -2.1 -0.9 -2.1 -2.1 s 0.9 -2.1 2.1 -2.1 h 4.2 z m 70.1 -12.9 c 0.9 -0.7 1.2 -2.0 0.5 -2.9 -0.7 -0.9 -2.0 -1.2 -2.9 -0.5 l -3.4 2.4 c -0.9 0.7 -1.2 2.0 -0.5 2.9 0.7 0.9 2.0 1.2 2.9 0.5 l 3.4 -2.4 z m -69.3 0.0 c -0.9 -0.7 -1.2 -2.0 -0.5 -2.9 0.7 -0.9 2.0 -1.2 2.9 -0.5 l 3.4 2.4 c 0.9 0.7 1.2 2.0 0.5 2.9 -0.7 0.9 -2.0 1.2 -2.9 0.5 l -3.4 -2.4 z m 55.6 -12.6 c 0.6 -1.0 0.2 -2.3 -0.8 -2.8 -1.0 -0.6 -2.3 -0.2 -2.8 0.8 l -2.0 3.6 c -0.6 1.0 -0.2 2.3 0.8 2.8 1.0 0.6 2.3 0.2 2.8 -0.8 l 2.0 -3.6 z m -41.8 0.0 c -0.6 -1.0 -0.2 -2.3 0.8 -2.8 1.0 -0.6 2.3 -0.2 2.8 0.8 l 2.0 3.6 c 0.6 1.0 0.2 2.3 -0.8 2.8 -1.0 0.6 -2.3 0.2 -2.8 -0.8 l -2.0 -3.6 z m 23.0 -5.7 c 0.0 -1.2 -0.9 -2.1 -2.1 -2.1 s -2.1 0.9 -2.1 2.1 v 4.2 c 0.0 1.2 0.9 2.1 2.1 2.1 s 2.1 -0.9 2.1 -2.1 v -4.2 z" class="nostroke"/>
+					</svg>
+					<span>HINT</span>
+				</span>
+				<span class="button" data-action="setLevel">
+					<svg viewbox="0 0 100 100">
 						<path d="M50,0 l0,40 l20-20 z M50,60 l0,40 l-20-20 z" />
+						<path d="M50,20 A 40,30 0 0,0 21.7,71.2 M50,80 A 40,30 0 0,0 78.3,28.8" stroke-width="20" class="nofill"/>
 					</svg>
-					RESET
+					<span>RESET</span>
 				</span>
-				<span class="button">
+				<span class="button" data-action="undoMove">
 					<svg viewbox="0 0 100 100">
-						<ellipse cx="50" cy="50" rx="40" ry="30" stroke-width="20" stroke-dasharray="25% 49% 27%" pathlength="100" class="nofill" />
 						<path d="M50,0 l0,40 l-20-20" />
+						<path d="M50,20 A 40,30 0 0,1 50,80" stroke-width="20" class="nofill"/>
 					</svg>
-					UNDO
+					<span>UNDO</span>
 				</span>
 			</div>
 		</div>
-
 	</body>
 </html>

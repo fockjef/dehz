@@ -7,27 +7,85 @@ body {
 	text-align: center;
 	margin-top: 2em;
 }
-#mainMenu .content {
-	margin: 2em auto;
+.noshow {
+	display: none;
 }
-#progressMeter {
+.content {
+	margin: 1em auto 2em;
+}
+.button {
+	display: inline-block;
+	cursor: pointer;
+	margin: 0px 1em;
+}
+.button.tile span {
+	display: inline-block;
+	padding: 0.15em 0.25em;
+}
+.button svg {
+	display: block;
+	width: 3.5em;
+	height: 3.5em;
+}
+.button svg+span {
+	display: inline-block;
+	margin-top: 0.25em;
+}
+svg *.nostroke { stroke: none !important; }
+svg *.nofill { fill: none !important; }
+
+/* --- Main Menu ---------------------------------------------------- */
+#progress {
 	height: 0px;
 }
-#progressMeter svg {
-	height: 20em; 
+#progress svg {
+	height: 20em;
 }
-#currentLevel { 
-	line-height: 4em; 
-	font-size: 5em; 
+#mainMenuLevel {
+	display: inline-block;
+	line-height: 4em;
+	font-size: 5em;
+	width: 4em;
 }
-#mainMenu .footer {
-	margin-top: 2em;
+
+/* --- Pack Menu ---------------------------------------------------- */
+#packMenu .header {
+	font-size: 2em;
 }
-#levelMenu { 
-	display: none; 
+#packMenu .content div {
+	display: block;
+	width: 15em;
+	height: 1.5em;
+	margin: 0.25em auto;
 }
-#puzzle { 
-	display: initial; 
+.floatL {
+	float: left;
+	margin-left: 1em;
+}
+.floatR {
+	float: right;
+	margin-right: 1em;
+}
+
+/* --- Level Menu --------------------------------------------------- */
+#levelMenu .header {
+	font-size: 2em;
+}
+#levelMenu .content {
+	width: 65%;
+}
+#levelMenu .content span.tile.button {
+	width: 15%;
+	min-width: 2em;
+	margin: 0.5em;
+}
+
+/* --- Puzzle ------------------------------------------------------- */
+#puzzleLevel {
+	font-size: 2.5em;
+	margin: 0px 2em;
+	position: relative;
+	bottom: 0.25em;
 }
 table {
 	border-collapse: collapse;
@@ -40,12 +98,14 @@ td {
 td > div {
 	width: 97.5%;
 	height: 97.5%;
+	margin: auto;
 }
-.tile, .goal {
+.tile {
 	border-radius: 5%;
 	box-shadow: 0em -0.15em 0em 0em rgba(0, 0, 0, 0.5) inset;
 	font-size: 2em;
 	line-height: 1.1em;
+	cursor: default;
 }
 .goal {
 	background-color: white !important;
@@ -65,22 +125,36 @@ td > div {
 	width: 33%;
 	height: 33%;
 	border-radius: 50%;
-	margin: 34%;
+	margin: auto;
 	animation: blink;
+}
+.dot.goal {
+	width: 97.5%;
+	height: 97.5%;
+	border-radius: 5%;
+}
+.button.disabled {
+	opacity: 0.25;
+	cursor: default;
+}
+
+/* --- Animations --------------------------------------------------- */
+body {
+	transition: background-color 0.5s ease-in, color 0.5s ease-in;
+}
+
+#puzzle-table td {
+	transition: background-color 0.5s ease-in;
+}
+.tile {
+	transition: width 0.15s ease-in, height 0.15s ease-in;
+}
+.shrink {
+	width: 0em;
+	height: 0em;
+	font-size: 0em;
 }
 @keyframes blink {0%{opacity:0.7;} 50%{opacity:0.4;} 100%{opacity:0.7;}}
 .blink {
 	animation: blink normal 2.5s infinite ease-in-out;
 }
-.button {
-	display: inline-block; 
-	cursor: pointer;
-	margin: 0px 1em;
-	padding: 0.2em 0.5em;
-}
-.button svg {
-	display: block;
-	width: 3.5em;
-}
-svg *.nostroke { stroke: none !important; }
-svg *.nofill { fill: none !important; }
