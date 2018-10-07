@@ -2,7 +2,6 @@
 
 use strict;
 use JSON;
-use Data::Dumper;
 
 chdir $ARGV[0];
 opendir my $DIR, ".";

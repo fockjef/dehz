@@ -261,7 +261,7 @@ var dehz = function(){
 			t.dataset.range = -2;
 		});
 	}
-	
+
 	function getHint(){
 		var solution = data.levels[currentLevel].solution, i = 0, m1, m2, movesMatch;
 		if( !solution ) return;
